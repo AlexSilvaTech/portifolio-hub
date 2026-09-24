@@ -1,0 +1,937 @@
+:root {
+    --fundo: #090b0d;
+    --fundo-secundario: #111518;
+
+    --texto: #f1eee6;
+    --texto-suave: rgba(241, 238, 230, 0.72);
+
+    --dourado: #a58a52;
+    --dourado-claro: #c2a96d;
+
+    --vermelho: #8f272e;
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    min-height: 100vh;
+
+    background-color: var(--fundo);
+
+    color: var(--texto);
+
+    font-family: "Inter", Arial, sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   FUNDO
+========================= */
+
+.fundo-galeria {
+    position: fixed;
+    inset: 0;
+
+    z-index: -2;
+
+    background-image:
+        linear-gradient(
+            rgba(7, 9, 11, 0.78),
+            rgba(7, 9, 11, 0.91)
+        ),
+        url("../img/background-fotografias.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+}
+
+
+.fundo-galeria::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 20%,
+            rgba(0, 0, 0, 0.48) 100%
+        );
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+.cabecalho {
+    width: min(1400px, 92%);
+
+    margin: 0 auto;
+
+    padding: 35px 0 0;
+
+    display: grid;
+
+    grid-template-columns: 1fr auto 1fr;
+
+    align-items: center;
+}
+
+
+.voltar {
+    justify-self: start;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: rgba(241, 238, 230, 0.78);
+
+    font-size: 10px;
+
+    font-weight: 500;
+
+    letter-spacing: 1.5px;
+
+    text-decoration: none;
+
+    text-transform: uppercase;
+
+    transition:
+        color 0.3s ease,
+        gap 0.3s ease;
+}
+
+
+.voltar span {
+    color: var(--dourado);
+
+    font-size: 16px;
+
+    transition: transform 0.3s ease;
+}
+
+
+.voltar:hover {
+    color: var(--dourado-claro);
+
+    gap: 13px;
+}
+
+
+.voltar:hover span {
+    transform: translateX(-3px);
+}
+
+
+.cabecalho-titulo {
+    text-align: center;
+}
+
+
+.legenda,
+.secao-legenda,
+.foto-categoria,
+.modal-categoria {
+    color: var(--dourado);
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    letter-spacing: 3px;
+}
+
+
+.cabecalho-titulo h1 {
+    margin: 8px 0;
+
+    color: #f4f2ec;
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: clamp(38px, 5vw, 62px);
+
+    font-weight: 500;
+
+    letter-spacing: 1px;
+
+    text-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.95),
+        0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+
+.subtitulo {
+    color: rgba(241, 238, 230, 0.48);
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: 8px;
+
+    letter-spacing: 4px;
+}
+
+
+/* =========================
+   INTRODUÇÃO
+========================= */
+
+.introducao {
+    width: min(800px, 90%);
+
+    margin: 110px auto 0;
+
+    text-align: center;
+}
+
+
+.introducao h2 {
+    margin: 12px 0 18px;
+
+    color: #f4f2ec;
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: clamp(25px, 3vw, 38px);
+
+    font-weight: 500;
+
+    line-height: 1.2;
+
+    text-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.95);
+}
+
+
+.introducao h2::after {
+    content: "";
+
+    display: block;
+
+    width: 55px;
+
+    height: 1px;
+
+    margin: 18px auto 0;
+
+    background-color: var(--dourado);
+
+    box-shadow:
+        0 0 8px rgba(165, 138, 82, 0.35);
+}
+
+
+.introducao p {
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    color: rgba(241, 238, 230, 0.82);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+
+/* =========================
+   GALERIA
+========================= */
+
+.galeria {
+    width: min(1400px, 92%);
+
+    margin: 75px auto 120px;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 45px 28px;
+}
+
+
+/* =========================
+   CARTÃO
+========================= */
+
+.foto-card {
+    min-width: 0;
+
+    opacity: 0;
+
+    transform: translateY(25px);
+
+    animation: aparecer 0.8s ease forwards;
+}
+
+
+.foto-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+
+.foto-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+
+.foto-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+
+.foto-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+
+@keyframes aparecer {
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================
+   MOLDURA
+========================= */
+
+.foto-moldura {
+    position: relative;
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    background:
+        linear-gradient(
+            145deg,
+            #725e35,
+            #b49a5f 18%,
+            #604f2d 45%,
+            #aa8c50 70%,
+            #46391f
+        );
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.65),
+        inset 0 0 0 2px rgba(238, 213, 150, 0.25),
+        inset 0 0 0 5px rgba(31, 24, 14, 0.55);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.45s ease,
+        box-shadow 0.45s ease;
+}
+
+
+.foto-moldura::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 6px;
+
+    border: 1px solid rgba(241, 216, 153, 0.45);
+
+    pointer-events: none;
+}
+
+
+.foto-moldura::after {
+    content: "";
+
+    position: absolute;
+
+    top: 10px;
+    left: 10px;
+
+    width: 24px;
+    height: 24px;
+
+    border-top: 1px solid rgba(241, 216, 153, 0.75);
+    border-left: 1px solid rgba(241, 216, 153, 0.75);
+
+    pointer-events: none;
+}
+
+
+.foto-moldura:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 24px 45px rgba(0, 0, 0, 0.78),
+        0 0 25px rgba(165, 138, 82, 0.12),
+        inset 0 0 0 2px rgba(238, 213, 150, 0.35),
+        inset 0 0 0 5px rgba(31, 24, 14, 0.55);
+}
+
+
+/* =========================
+   ÁREA DA FOTO
+========================= */
+
+.foto-area {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 4 / 3;
+
+    overflow: hidden;
+
+    background: #080a0c;
+
+    border: 5px solid #17130e;
+}
+
+
+.foto-area img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    filter:
+        saturate(0.9)
+        contrast(1.04)
+        brightness(0.92);
+
+    transition:
+        transform 0.6s ease,
+        filter 0.6s ease;
+}
+
+
+.foto-moldura:hover .foto-area img {
+    transform: scale(1.045);
+
+    filter:
+        saturate(1)
+        contrast(1.05)
+        brightness(1);
+}
+
+
+/* =========================
+   INFORMAÇÕES
+========================= */
+
+.foto-informacoes {
+    padding: 20px 4px 0;
+}
+
+
+.foto-informacoes h3 {
+    margin: 8px 0 10px;
+
+    color: #f4f2ec;
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.95);
+}
+
+
+.foto-meta {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 10px;
+
+    color: rgba(241, 238, 230, 0.52);
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+
+.foto-meta span + span::before {
+    content: "•";
+
+    margin-right: 15px;
+
+    color: var(--dourado);
+}
+
+
+.foto-informacoes p {
+    color: rgba(241, 238, 230, 0.68);
+
+    font-size: 12px;
+
+    line-height: 1.65;
+
+    text-shadow:
+        0 2px 7px rgba(0, 0, 0, 0.9);
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-fotografia {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 200;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 35px;
+
+    background: rgba(3, 5, 6, 0.9);
+
+    backdrop-filter: blur(10px);
+
+    -webkit-backdrop-filter: blur(10px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+}
+
+
+.modal-fotografia.aberta {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+}
+
+
+.modal-conteudo {
+    position: relative;
+
+    width: min(1150px, 95vw);
+
+    max-height: 92vh;
+
+    display: grid;
+
+    grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.7fr);
+
+    gap: 40px;
+
+    padding: 35px;
+
+    overflow: auto;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(22, 26, 29, 0.97),
+            rgba(8, 11, 13, 0.98)
+        );
+
+    border: 1px solid rgba(165, 138, 82, 0.38);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.8);
+}
+
+
+.modal-conteudo::before,
+.modal-conteudo::after {
+    content: "";
+
+    position: absolute;
+
+    width: 35px;
+
+    height: 35px;
+
+    border-color: var(--dourado);
+
+    border-style: solid;
+
+    opacity: 0.7;
+}
+
+
+.modal-conteudo::before {
+    top: 12px;
+    left: 12px;
+
+    border-width: 1px 0 0 1px;
+}
+
+
+.modal-conteudo::after {
+    right: 12px;
+    bottom: 12px;
+
+    border-width: 0 1px 1px 0;
+}
+
+
+/* =========================
+   BOTÃO FECHAR
+========================= */
+
+.modal-fechar {
+    position: absolute;
+
+    top: 15px;
+    right: 18px;
+
+    z-index: 5;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid rgba(165, 138, 82, 0.45);
+
+    background: rgba(7, 9, 11, 0.8);
+
+    color: var(--texto);
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        color 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease;
+}
+
+
+.modal-fechar:hover {
+    color: var(--dourado-claro);
+
+    border-color: var(--dourado);
+
+    background: rgba(165, 138, 82, 0.12);
+}
+
+
+/* =========================
+   IMAGEM DO MODAL
+========================= */
+
+.modal-imagem {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 400px;
+
+    padding: 10px;
+
+    background: rgba(4, 6, 7, 0.65);
+
+    border: 1px solid rgba(165, 138, 82, 0.25);
+}
+
+
+.modal-imagem img {
+    display: block;
+
+    max-width: 100%;
+
+    max-height: 75vh;
+
+    width: auto;
+    height: auto;
+
+    object-fit: contain;
+}
+
+
+/* =========================
+   INFORMAÇÕES DO MODAL
+========================= */
+
+.modal-informacoes {
+    align-self: center;
+
+    padding: 20px 15px;
+}
+
+
+.modal-informacoes h2 {
+    margin: 12px 0 20px;
+
+    color: #f4f2ec;
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: clamp(25px, 3vw, 38px);
+
+    font-weight: 500;
+
+    line-height: 1.15;
+
+    text-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.95);
+}
+
+
+.modal-meta {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 25px;
+
+    padding: 15px 0;
+
+    border-top: 1px solid rgba(165, 138, 82, 0.25);
+
+    border-bottom: 1px solid rgba(165, 138, 82, 0.25);
+
+    color: rgba(241, 238, 230, 0.58);
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+
+.modal-meta span::before {
+    color: var(--dourado);
+}
+
+
+.modal-informacoes p {
+    color: rgba(241, 238, 230, 0.78);
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 35px 20px;
+
+    border-top: 1px solid rgba(165, 138, 82, 0.25);
+
+    background: rgba(7, 9, 11, 0.8);
+
+    text-align: center;
+}
+
+
+footer p {
+    color: rgba(241, 238, 230, 0.6);
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+}
+
+
+footer span {
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--dourado);
+
+    font-family: "Cinzel", Georgia, serif;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 1100px) {
+
+    .galeria {
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 50px 30px;
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .cabecalho {
+        grid-template-columns: 1fr;
+    }
+
+    .voltar {
+        justify-self: center;
+
+        margin-bottom: 35px;
+    }
+
+    .introducao {
+        margin-top: 80px;
+    }
+
+    .modal-conteudo {
+        grid-template-columns: 1fr;
+
+        width: min(700px, 94vw);
+
+        gap: 25px;
+
+        padding: 30px;
+    }
+
+    .modal-imagem {
+        min-height: 250px;
+    }
+
+    .modal-informacoes {
+        padding: 10px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .cabecalho {
+        width: 88%;
+
+        padding-top: 25px;
+    }
+
+    .cabecalho-titulo h1 {
+        font-size: 38px;
+    }
+
+    .introducao {
+        width: 88%;
+
+        margin-top: 65px;
+    }
+
+    .introducao h2 {
+        font-size: 26px;
+    }
+
+    .introducao p {
+        font-size: 13px;
+    }
+
+    .galeria {
+        width: 88%;
+
+        grid-template-columns: 1fr;
+
+        gap: 55px;
+
+        margin-top: 55px;
+    }
+
+    .foto-informacoes h3 {
+        font-size: 19px;
+    }
+
+    .modal-fotografia {
+        padding: 15px;
+    }
+
+    .modal-conteudo {
+        width: 100%;
+
+        max-height: 94vh;
+
+        padding: 25px 18px;
+
+        gap: 15px;
+    }
+
+    .modal-imagem {
+        min-height: 180px;
+    }
+
+    .modal-informacoes h2 {
+        font-size: 26px;
+    }
+
+}
